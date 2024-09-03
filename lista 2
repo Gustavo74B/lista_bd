@@ -1,0 +1,17 @@
+-- LISTA 2
+
+USE db_ecommerce_exam;
+USE db_crm_exam;
+USE db_financas_exam;
+USE db_prontuario_exam;
+USE db_logistica_exam;
+
+-- Exercício 4:
+-- Escreva uma consulta para listar todos os itens de pedido junto com o
+-- nome dos produtos. Utilize INNER JOIN para combinar as tabelas de itens
+-- de pedido e produtos.
+
+select itens_pedido.item_pedido_id, itens_pedido.pedido_id, itens_pedido.produto_id, itens_pedido.quantidade, itens_pedido.preco_unitario, produtos.nome
+from itens_pedido
+inner join produtos
+	on produtos.produto_id = itens_pedido.produto_id;

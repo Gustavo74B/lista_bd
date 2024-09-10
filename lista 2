@@ -1,11 +1,6 @@
 -- LISTA 2
 
 USE db_ecommerce_exam;
-USE db_crm_exam;
-USE db_financas_exam;
-USE db_prontuario_exam;
-USE db_logistica_exam;
-
 -- Exercício 4:
 -- Escreva uma consulta para listar todos os itens de pedido junto com o
 -- nome dos produtos. Utilize INNER JOIN para combinar as tabelas de itens
@@ -15,3 +10,71 @@ select itens_pedido.item_pedido_id, itens_pedido.pedido_id, itens_pedido.produto
 from itens_pedido
 inner join produtos
 	on produtos.produto_id = itens_pedido.produto_id;
+    
+-- Exercício 6: Elabore uma consulta para exibir os detalhes de cada pedido
+-- (pedido_id, nome do cliente, total do pedido) e todos os itens do pedido
+-- (nome do produto, quantidade, preço unitário). Utilize INNER JOIN para
+-- combinar as tabelas de pedidos, clientes e itens de pedido.
+
+select pedidos.pedido_id, clientes.nome, pedidos.total, produtos.nome, itens_pedido.quantidade, itens_pedido.preco_unitario
+from itens_pedido
+inner join produtos
+	on itens_pedido.produto_id = produtos.produto_id
+inner join pedidos
+	on itens_pedido.pedido_id = pedidos.pedido_id
+inner join clientes
+	on pedidos.cliente_id = clientes.cliente_id;
+    
+    
+    
+USE db_crm_exam;
+-- Exercício 2:
+-- Desenvolva uma consulta que liste todas as campanhas e os clientes que
+-- participaram delas. Utilize INNER JOIN para combinar as tabelas de
+-- campanhas e participações de campanha.
+
+select campanhas.nome, clientes.nome
+from campanhas
+inner join participacoes_campanha
+	on campanhas.campanha_id = participacoes_campanha.campanha_id
+inner join clientes
+	on participacoes_campanha.cliente_id = clientes.cliente_id;
+    
+    
+    
+USE db_financas_exam;
+-- Exercício 1:
+-- Escreva uma consulta que liste todas as transações junto com o nome da
+-- conta associada a cada transação. Utilize INNER JOIN para combinar as
+-- tabelas de transações e contas.
+
+select transacoes.transacao_id, contas.nome
+from transacoes
+inner join contas
+	on transacoes.conta_id = contas.conta_id;
+    
+    
+    
+USE db_prontuario_exam;
+-- Exercício 1:
+-- Crie uma consulta que recupere todos os prontuários, incluindo o nome do
+-- paciente e o nome do médico que o atendeu. Utilize INNER JOIN entre as
+-- tabelas de prontuários e pacientes.
+
+select pacientes.nome, prontuarios.medico
+from pacientes
+inner join prontuarios
+	on pacientes.paciente_id = prontuarios.paciente_id;
+    
+    
+
+USE db_logistica_exam;
+-- Exercício 2:
+-- Desenvolva uma consulta que recupere todos os movimentos de estoque e
+-- o nome do produto associado a cada movimento. Utilize INNER JOIN entre
+-- as tabelas de movimentação de estoque e produtos.
+
+select movimentacao_estoque.movimentacao_id, produtos.nome
+from movimentacao_estoque
+inner join produtos
+	on movimentacao_estoque.produto_id = produtos.produto_id;
